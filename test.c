@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "img_ops.h"
+#include "encryption/permisions.h"
 
 int test(int, int);
 
@@ -22,6 +23,17 @@ int main() {
 
     printf("Writting secret image to PPM\n");
     writePPMImage(img, "./testOut/test_secret.ppm");
+
+
+    printf("Testing pad_password\n");
+    char old_password[100] = "old";
+    char new_password[100] = "old\03\03\03";
+    pad_password(old_password, 6);
+    printf("Expected: %s\n", new_password);
+    printf("Actual: %s\n", old_password);
+    test(strcmp(old_password, new_password), 0);
+    test(strlen(old_password), 6);
+
 }
 
 int test(int actual, int expected) {
