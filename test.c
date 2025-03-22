@@ -28,11 +28,11 @@ int main() {
     printf("Testing pad_password\n");
     char old_password[100] = "old";
     char new_password[100] = "old\03\03\03";
-    pad_password(old_password, 6);
+    char* test_password = pad_password(old_password, 6);
     printf("Expected: %s\n", new_password);
-    printf("Actual: %s\n", old_password);
-    test(strcmp(old_password, new_password), 0);
-    test(strlen(old_password), 6);
+    printf("Actual: %s\n", test_password);
+    test(strcmp(test_password, new_password), 0);
+    test(strcmp(test_password, new_password), 0);
 
 }
 
